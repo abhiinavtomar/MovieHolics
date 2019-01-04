@@ -1,20 +1,241 @@
 body {
-    background-color: black;
+    background-image: url("https://images.unsplash.com/photo-1509403690534-26d3b04c8a4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60");
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
     box-sizing: border-box;
+    margin: 0px;
+    font-family: "Avenir", "Montserrat";
 }
 
-.input {
-    width: 60%;
-    margin: 20%;
+#navbar {
+    padding: 15px; 
+    background-color: transparent;
+}
+
+.navbar-elements {
+    padding: 5px;
+    font-size: 30px;
+    margin-left: 10px;
+    color: white;
+    text-decoration: none;
+    transition: all 0.5s;
+}
+
+.navbar-elements:hover {
+    color: black;
+    background-color: white;
+    border-radius: 20px;
+    font-weight: bolder;
+    padding: 10px;
+}
+
+
+.right-navbar {
+    float: right;
+}
+
+.navbar-bars {
+    float: right;
+    display: none;
+}
+
+.flash-message-container {
     text-align: center;
+    color: violet;
+    margin: 10px;
+}
+
+.flash-message-container .success {
+    background-color: green;
+    padding: 10px;
+    font-size: 20px;
+    margin: 5px;
+    border-radius: 20px;
+    font-weight:  bolder;
+}
+
+.flash-message-container .error {
+    background-color: red;
+    padding: 10px;
+    font-size: 20px;
+    margin: 5px;
+    border-radius: 20px;
+    font-weight:  bolder;
+}
+
+.search {
+    width: 60%;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 40px;
+    outline: none;
+    border: none;
+    font-size: 25px;
+    margin-top: 22%;
+}
+
+.search-container {
+    text-align: center;
+}
+
+.submit {
+    margin: 10px;
+    background-color: transparent;
+    padding: 10px 25px;
+    font-size: 25px;
+    border: 2px solid steelblue;
+    border-radius: 25px;
+    color: steelblue;
+    outline: none;
+}
+
+.submit:hover {
+    background-color: steelblue;
+    color: black;
+    font-weight: bolder;
+}
+
+.login-container {
+    margin-top: 10%;
+    text-align: center;
+}
+
+.login-input {
+    border-radius: 15px;
+    padding: 10px;
+    margin: 10px 2px;
+    outline: none;
+}
+
+.login-btn {
+    border-radius: 20px;
+    padding: 15px 25px;
+    font-weight: bolder;
+    border: none;
+    outline: none;
+    background-color: steelblue;
+}
+
+.register-container {
+    margin-top: 10%;
+    text-align: center;
+}
+
+.register-input {
+    border-radius: 15px;
+    padding: 10px;
+    margin: 10px 2px;
+    outline: none;
+}
+
+.register-btn {
+    border-radius: 20px;
+    padding: 15px 25px;
+    font-weight: bolder;
+    border: none;
+    outline: none;
+    background-color: steelblue;
+}
+
+.user-container {
+    color:white;
+    margin-right: 30px;
+    float: right;
+    text-align: center;
+    max-width: 600px;
+    min-width: 300px;
+}
+
+.myMovies-container {
+    padding: 50px;
+    color:white;
+    text-align: center;
+}
+
+.dashboard-btn {
+    border-radius: 20px;
+    padding: 15px;
+    font-weight: bolder;
+    border: none;
+    outline: none;
+    background-color: steelblue;
+    transition: padding 0.2s;
+}
+
+.dashboard-btn:hover {
+    padding: 20px;
+    font-weight: bolder;
+}
+
+.results-container {
+    text-align: center;
+    color: white;
+}
+
+.results-elements {
+    display: inline-block;
+    border: 1px solid white;
+    padding: 10px;
+    transition: padding 0.4s;
+    margin: 5px;
+}
+
+.results-elements:hover {
+    padding: 50px;
+    background-color: yellow;
+}
+
+.results-btn {
+    border-radius: 20px;
+    padding: 15px;
+    font-weight: bolder;
+    border: none;
+    outline: none;
+    background-color: steelblue;
+    transition: padding 0.2s;
+}
+
+.results-btn:hover {
+    padding: 20px;
+    font-weight: bolder;
+}
+
+.movie-container {
+    width: 350px;
+    float: left;
+    color: white;
+    margin: 20px;
+}
+
+.movie-info {
+    width: 100%;
+    text-indent: 30px;
+    color: yellow;
+}
+
+@media only screen and (max-width: 600px) {
+    .right-navbar {
+        display: none;
+    }
+    .navbar-bars {
+        display: inline-block;
+        position: absolute;
+        right: 5px;
+    }
+    .search {
+        margin-top: 45%;
+        width: 90%;
+    }
+    
+    #navbar.responsive {
+        position: relative;
+    }
+    #navbar.responsive .right-navbar {
+        margin-top: 10px;
+        display: block;
+        float: none;
+    }
+    
     
 }
-
-
-
-.background {
-    background-color: #232323;
-}
-
-
-

@@ -1,0 +1,53 @@
+<% include ../partials/header %>
+
+
+<% if(data["Response"] == "True") { %>
+        
+        <div class="results-container">
+        <h1>Your Results</h1>
+        <% data["Search"].forEach(function(movie) { %>
+            <div class="results-elements">
+                <h2> <%= movie["Title"] %></h2>
+                    <img src = "<%= movie["Poster"] %>" alt = "BlogsImage" height="350px" style="border-radius: 50%;">
+                    <p> <%= movie["Year"] %> </p>
+                    <form action="/movies/<%= movie["imdbID"] %>" method="GET" style="display: inline;">
+                        <input style="display: none;" name="movieid" value="<%= movie["imdbID"] %>">
+                        <button class="results-btn">More Info</button>
+                    </form>
+                    <form action="/movies" method="POST" style="display: inline;">
+                        <input style="display: none;" name="movieid" value="<%= movie["imdbID"]  %>">
+                        <input style="display: none;" name="moviename" value="<%= movie["Title"] %>">
+                        <button class="results-btn">Add to myList</button>
+                    </form>
+            </div>
+        <% }) %>
+        <h3><a href="/" >Search Again!</a></h3>
+    </div>
+        
+<% } else { %>
+    
+    <div class="results-container">
+        <h1><%= data["Error"] %></h1>
+        <img src="https://images.unsplash.com/photo-1526297003708-f5a1c2c9c6e7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" width="350px;" alt="sadness" style="border-radius: 70%;">
+        <br>
+        <br>
+        <br>
+        <a href="/" class="dashboard-btn" style="text-decoration: none;">Start Fresh</a>
+    </div>
+        
+    
+<% } %>
+    
+
+
+
+
+<% include ../partials/footer %>
+
+
+
+
+
+
+
+

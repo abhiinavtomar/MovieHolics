@@ -1,0 +1,37 @@
+<% include ../partials/header %>
+
+<div class="user-container">
+    <h1>About</h1>
+    <!--<form action="/<%= user._id %>?_method=PUT" method="POST">-->
+    <!--    <button class="dashboard-btn">EDIT YOUR INFO</button>-->
+    <!--</form>-->
+    <p><%= user.username %></p>
+    <img src="https://images.unsplash.com/photo-1503248947681-3198a7abfcc9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80" alt="pic" width="300px" height="300px" style="border-radius: 50%;">
+    <p>Why so serious ?</p>
+    
+</div>
+<div class="myMovies-container">
+    <h1>Favourites</h1>
+    <% if(user.myMovies.length != 0) { %>
+        
+        <% user.myMovies.forEach(function(movie){ %>
+            <p> <%= movie.name %> </p>
+            <form action="/movies/<%= movie.id %>" method="GET" style="display: inline;">
+                <input style="display: none;" name="movieid" value="<%= movie.id %>">
+                <button class="dashboard-btn">More Info</button>
+            </form>
+            <form action="/movies/<%=movie.id %>?_method=DELETE" method="POST" style="display: inline;">
+                    <input style="display: none;" name="ownerid" value="<%= user._id %>">
+                    <button class="dashboard-btn">DELETE</button>
+                </form>    
+        <% }) %>
+        
+    <% } else { %>
+        <br>
+        <p>NOTHING FOUND IN YOUR LIST</p>
+        <br>
+        <a href="/" class="dashboard-btn" style="text-decoration: none;">ADD SOMETHING</a>
+    <% } %>
+    </div>
+
+<% include ../partials/footer %>

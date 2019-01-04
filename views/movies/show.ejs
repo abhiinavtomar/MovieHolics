@@ -1,0 +1,53 @@
+<% include ../partials/header %>
+
+<% if(data["Response"] == "True") { %>
+
+    <div class="movie-container">
+        <h1><%= data["Title"] %></h1>
+        <img src = "<%= data["Poster"] %>" alt = "Image" width="350px"> 
+        <form action="/movies" method="POST" style="display: inline;">
+            <input style="display: none;" name="movieid" value="<%= data["imdbID"]  %>">
+            <input style="display: none;" name="moviename" value="<%= data["Title"] %>">
+            <button class="results-btn">Add to myList</button>
+        </form>
+    </div>
+    <div class="movie-info">
+            <p><b>RELEASED</b> : <%= data["Released"] %></p>
+            <p><b>RATED</b> : <%= data["Rated"] %></p>
+            
+            <p><b>RUNTIME</b> : <%= data["Runtime"] %></p>
+            <p><b>GENRE</b> : <%= data["Genre"] %></p>
+            <p><b>DIRECTOR</b> : <%= data["Director"] %></p>
+            <p><b>WRITER</b> : <%= data["Writer"] %></p>
+            <p><b>ACTORS</b> : <%= data["Actors"] %></p>
+            <p><b>PLOT</b> : <%= data["Plot"] %></p>
+            <p><b>LANGUAGE</b> : <%= data["Language"] %></p>
+            <p><b>COUNTRY</b> : <%= data["Country"] %></p>
+            <p><b>AWARDS</b> : <%= data["Awards"] %></p>
+            <p><b>IMDB RATING</b> : <%= data["imdbRating"] %> &nbsp <b>IMDB VOTES</b> : <%= data["imdbVotes"] %> </p>
+            <% data["Ratings"].forEach(function(rating){ %>
+                <p><span><b> <%= rating.Source %> </b>  : </span>
+                <span> <%= rating.Value %> </span> </p>
+            <% }) %>
+            <p><b>DVD RELEASED</b> : <%= data["DVD"] %></p>
+            <p><b>BOX OFFICE</b> : <%= data["BoxOffice"] %></p>
+            <p><b>PRODUCTIONPRODUCTION</b> : <%= data["Production"] %></p>
+            <p><a href="<%= data["Website"] %>" target="_blank" style="color: yellow;text-decoration: none;"><b>WEBSITE</b> : <%= data["Website"] %></a></p>
+            <a href="/" class="results-btn" style="text-decoration: none;">Search Again!</a>
+    </div>    
+
+<% } else { %>
+    
+    <div class="results-container">
+        <h1> No movies found </h1>
+        <img src="https://images.unsplash.com/photo-1526297003708-f5a1c2c9c6e7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" width="350px;" alt="sadness" style="border-radius: 70%;">
+        <br>
+        <br>
+        <br>
+        <a href="/" class="dashboard-btn" style="text-decoration: none;">Start Fresh</a>
+    </div>
+        
+    
+<% } %>
+
+<% include ../partials/footer %>

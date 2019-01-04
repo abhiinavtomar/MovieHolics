@@ -1,41 +1,48 @@
 var express         = require("express"),
     request         = require("request"),
-    app             = express();
+    app             = express(),
+    Comment         = require("./models/comment"),
+    User            = require("./models/user"),
+    mongoose        = require("mongoose"),
+    methodOverride  = require("method-override"),
+    bodyParser      = require("body-parser"),
+    flash           = require("connect-flash"),
+    passportLocal   = require("passport-local"),
+    passport        = require("passport");
     
+var indexRoutes     = require("./routes/index"),
+    moviesRoutes    = require("./routes/movies");    
+    
+var url = process.env.DATABASEURL || "mongodb://localhost:27017/movieholics";
+mongoose.connect(url, {useNewUrlParser: true});
 app.set("view engine", "ejs");
-app.use(express.static("public"));
+app.use(express.static(__dirname + "/public"));
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(methodOverride("_method"));
 
-app.get("/", function(req, res){
-    res.render("index"); 
+    //  PASSPORT CONFIGURATION  
+app.use(require("express-session")({
+    secret: "abhiinavtomar",
+    resave: false,
+    saveUninitialized: false
+}));
+
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new passportLocal(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+app.use(function(req, res, next) {
+    res.locals.currentUser = req.user; 
+    res.locals.success     = req.flash("success");
+    res.locals.error       = req.flash("error");
+    next();
 });
 
-app.get("/login", function(req, res){
-    res.render("login");
-});
-
-app.get("/logout", function(req, res) {
-    req.logout();
-    res.redirect("/");
-});
-
-app.get("/register", function(req, res) {
-    res.render("register");
-});
-
-app.get("/results", function(req, res) {
-        var query = req.query.search;
-        var url = "http://omdbapi.com/?s=" + query + "&apikey=thewdb";
-        request(url, function(error, response, body){
-            if(!error && response.statusCode == 200) {
-                var data = JSON.parse(body)
-                res.render("results", {data: data});
-            }
-        });
-});
-
-app.get("/about", function(req, res) {
-    res.render("about"); 
-});
+app.use("/movies", moviesRoutes);
+app.use("/", indexRoutes);
 
 app.listen(process.env.PORT, process.env.IP, function(req, res){
     console.log("Server Started"); 
