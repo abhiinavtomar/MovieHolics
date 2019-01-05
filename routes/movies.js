@@ -5,11 +5,13 @@ var express     = require("express"),
     
 router.get("/", function(req, res) {
         var query = req.query.search;
-        if(query == "") {
+        var genre = req.query.genre;
+        var year  = req.query.year;
+        if(query == "" && genre == "" && year == "") {
             req.flash("error", "Search something !!!");
             res.redirect("/");
         }
-        var url = "http://omdbapi.com/?s=" + query + "&apikey=thewdb";
+        var url = "http://omdbapi.com/?s=" + query + "&type=" + genre + "&y=" + year + "&apikey=thewdb";
         request(url, function(error, response, body){
             if(!error && response.statusCode == 200) {
                 var data = JSON.parse(body);
@@ -71,6 +73,7 @@ function isLoggedIn(req, res, next) {
     if(req.isAuthenticated()) {
         return next();
     } 
+    req.flash("error", "Please login to continue");
     res.redirect("/login");
 }
 

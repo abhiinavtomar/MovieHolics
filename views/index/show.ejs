@@ -2,12 +2,40 @@
 
 <div class="user-container">
     <h1>About</h1>
-    <!--<form action="/<%= user._id %>?_method=PUT" method="POST">-->
-    <!--    <button class="dashboard-btn">EDIT YOUR INFO</button>-->
-    <!--</form>-->
+    
     <p><%= user.username %></p>
     <img src="https://images.unsplash.com/photo-1503248947681-3198a7abfcc9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80" alt="pic" width="300px" height="300px" style="border-radius: 50%;">
-    <p>Why so serious ?</p>
+    <% if(currentUser.username != user.username) { %>
+        <% var flag = 0; %>
+        <% currentUser.following.forEach(function(user1){ %>
+        <%    if(user.username == user1.name) { %>
+        <%        flag = 1; %>
+        <%       return; %>
+        <%    } %>
+        <% }) %>
+        <% if(flag == 0) { %>
+            <form action="/<%= user._id %>" method="POST">
+                <button class="dashboard-btn">Follow</button>    
+            </form>
+            
+        <% } else { %>
+            <form action="/<%= user._id %>" method="POST">
+                <button class="dashboard-btn">Unfollow</button>    
+            </form>
+            
+        <% } %>
+    <% } %>
+    
+    <% if(user.following.length != 0) { %>  
+        <h1>Following Lists</h1>
+        <% user.following.forEach(function(user1) { %>
+            <a href="/<%= user1.id %>"><p> <%= user1.name %> </p></a>
+        <% }) %>
+    <% } else { %>
+        <br>
+        <p>No Followings !!!</p>
+        <br>
+    <% } %> 
     
 </div>
 <div class="myMovies-container">
@@ -32,6 +60,13 @@
         <br>
         <a href="/" class="dashboard-btn" style="text-decoration: none;">ADD SOMETHING</a>
     <% } %>
-    </div>
+</div>
+
+<div class="random-user-container">
+    <h1>Check out these profiles</h1>
+    <% for(var i = 0; i < 2 ; i++) { %>
+        <button class="dashboard-btn"><a href="/<%= allUsers[i]._id%>"> <%= allUsers[i].username %> </a> </button>
+    <% } %>
+</div>
 
 <% include ../partials/footer %>

@@ -50,10 +50,48 @@ router.get("/:id", isLoggedIn, function(req, res) {
         if(err) {
             res.render("other");
         } else {
-            res.render("index/show", { user: user }); 
+            User.find({}, function(err, allUsers){
+                if(err) {
+                    req.flash("error", "Something happened");
+                    res.redirect("/");
+                } else {
+                    res.render("index/show", { user: user, allUsers: allUsers }); 
+                }
+            });
+            
         }
-    })
+    });
     
+});
+
+router.post("/:id", isLoggedIn, function(req, res) {
+    User.findById(req.params.id, function(err, user) {
+        if(err) {
+            console.log(err);
+            res.redirect("/" + req.params.id);
+        } else {
+                var flag = 0;
+                var myUser;
+                req.user.following.forEach(function(user1){
+                if(user1.name == user.username) {
+                    myUser = user1;
+                    flag = 1;
+                    return;
+                } 
+            });
+            if(flag == 0) {
+                req.user.following.push({name: user.username, id: user._id});
+                req.user.save();
+                req.flash("success", "Successfully followed ...");
+                res.redirect("/" + req.params.id);
+            } else {
+                req.user.following.id(myUser._id).remove();
+                req.user.save();
+                req.flash("success", "Successfully unfollowed...");
+                res.redirect("/" + req.params.id);
+            }
+        } 
+    });
 });
 
 // router.put("/:id", isLoggedIn, function(req, res) {
@@ -74,6 +112,7 @@ function isLoggedIn(req, res, next) {
     if(req.isAuthenticated()) {
         return next();
     } 
+    req.flash("error", "Please login to continue");
     res.redirect("/login");
 }
 

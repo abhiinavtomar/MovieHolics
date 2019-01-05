@@ -8,7 +8,7 @@
         <% data["Search"].forEach(function(movie) { %>
             <div class="results-elements">
                 <h2> <%= movie["Title"] %></h2>
-                    <img src = "<%= movie["Poster"] %>" alt = "BlogsImage" height="350px" style="border-radius: 50%;">
+                    <img src = "<%= movie["Poster"] %>" alt = "Image Not Available" height="350px" style="border-radius: 50%;">
                     <p> <%= movie["Year"] %> </p>
                     <form action="/movies/<%= movie["imdbID"] %>" method="GET" style="display: inline;">
                         <input style="display: none;" name="movieid" value="<%= movie["imdbID"] %>">

@@ -5,8 +5,12 @@ var userSchema  = new mongoose.Schema({
     username: String,
     password: String,
     myMovies: [{
-        name: String,
-        id: String
+            name: String,
+            id: String
+        }],
+    following: [{
+            name: String,
+            id: String
     }]
     });
 userSchema.plugin(passportLocalMongoose);

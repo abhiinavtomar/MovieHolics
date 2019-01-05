@@ -72,11 +72,21 @@ body {
     outline: none;
     border: none;
     font-size: 25px;
-    margin-top: 22%;
+    margin-top: 20%;
 }
 
 .search-container {
     text-align: center;
+}
+
+.year {
+    text-align: center;
+    line-height: 40px;
+    border-radius: 40px;
+    outline: none;
+    border: none;
+    font-size: 25px;
+    margin-top: 10px;
 }
 
 .submit {
@@ -153,6 +163,11 @@ body {
     text-align: center;
 }
 
+.random-user-container {
+    text-align: center;
+    color: white;
+}
+
 .dashboard-btn {
     border-radius: 20px;
     padding: 15px;
@@ -171,6 +186,7 @@ body {
 .results-container {
     text-align: center;
     color: white;
+    
 }
 
 .results-elements {
@@ -179,6 +195,7 @@ body {
     padding: 10px;
     transition: padding 0.4s;
     margin: 5px;
+    width: 400px;
 }
 
 .results-elements:hover {
