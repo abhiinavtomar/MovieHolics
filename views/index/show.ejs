@@ -67,9 +67,12 @@
         
     <% } else { %>
         <br>
-        <p>NOTHING FOUND IN YOUR LIST</p>
+        <p>NOTHING FOUND IN THE LIST</p>
         <br>
-        <a href="/" class="dashboard-btn" style="text-decoration: none;">ADD SOMETHING</a>
+        <% if(currentUser.username == user.username) { %>
+            <a href="/" class="dashboard-btn" style="text-decoration: none;">ADD SOMETHING</a>
+        <% } %>
+        
     <% } %>
 </div>
 
