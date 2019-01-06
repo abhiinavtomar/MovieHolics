@@ -9,7 +9,13 @@
             <input style="display: none;" name="moviename" value="<%= data["Title"] %>">
             <button class="results-btn">Add to myList</button>
         </form>
-        <img src = "<%= data["Poster"] %>" alt = "Image Not Available" width="350px"> 
+        <form action="/movies/recommend" method="GET" style="display: inline;">
+            <input style="display: none;" name="movieid" value="<%= data["imdbID"] %>">
+            <input style="display: none;" name="moviename" value="<%= data["Title"] %>">
+            <input style="display: none;" name="type" value="recommend">
+            <button class="results-btn">Recommend</button>
+        </form>
+        <img src = "<%= data["Poster"] %>" alt ="Image Not Available" width="350px"> 
         
     </div>
     <div class="movie-info">

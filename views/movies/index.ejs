@@ -19,6 +19,12 @@
                         <input style="display: none;" name="moviename" value="<%= movie["Title"] %>">
                         <button class="results-btn">Add to myList</button>
                     </form>
+                    <form action="/movies/recommend" method="GET" style="display: inline;">
+                        <input style="display: none;" name="movieid" value="<%= movie["imdbID"] %>">
+                        <input style="display: none;" name="moviename" value="<%= movie["Title"] %>">
+                        <input style="display: none;" name="type" value="recommend">
+                        <button class="results-btn">Recommend</button>
+                    </form>
             </div>
         <% }) %>
         <h3><a href="/" >Search Again!</a></h3>

@@ -15,6 +15,11 @@ var userSchema  = new mongoose.Schema({
     followers: [{
             name: String,
             id: String
+        }],
+    recommendation: [{
+            name: String,
+            id: String,
+            owner: String
         }]
     });
 userSchema.plugin(passportLocalMongoose);

@@ -36,8 +36,47 @@ router.post("/", isLoggedIn, function(req, res) {
             req.flash("error", "Movie is already added to your list");
         }
         res.redirect("/" + req.user._id);
-       
-});    
+});   
+
+router.get("/recommend", isLoggedIn, function(req, res) {
+    var movie = { id: req.query.movieid, name: req.query.moviename };
+    res.render("movies/recommend", {movie: movie} ); 
+});
+
+router.post("/recommend", isLoggedIn, function(req, res) {
+    var recommendedmovie = { name: req.body.moviename, id: req.body.movieid, owner: req.body.owner};
+    User.findById(req.body.receiver, function(err, user) {
+        if(err) {
+            req.flash("error", "Movie not recommended ,try again !!!");
+            res.redirect("/" + user._id);
+        } else {
+            var flag = 0;
+            user.recommendation.forEach(function(movie) {
+                if(movie.id == recommendedmovie.id) {
+                    flag = 1;
+                    return;
+                }
+            });
+            if(flag == 0) {
+            user.recommendation.push(recommendedmovie);
+            user.save();
+            } 
+            res.redirect("/" + user._id);
+        }
+    });
+});
+
+router.delete("/recommend", isLoggedIn, function(req, res) {
+    if(req.user._id.equals(req.body.ownerid)) {
+        req.flash("success", "Recommendation deleted successfully ...");
+        req.user.recommendation.id(req.body.movieid).remove();
+        req.user.save();
+        res.redirect("/" + req.body.ownerid);
+    } else {
+        req.flash("error", "You dont have permissions to delete this recommendation !!!");
+        res.redirect("/" + req.body.ownerid); 
+    }
+});
     
 router.get("/:id", function(req, res){
     var id= req.query.movieid;

@@ -1,0 +1,19 @@
+<% include ../partials/header %>
+
+<div class="recommend-container">
+    <% if(currentUser.followers.length != 0) { %>
+    <% currentUser.followers.forEach(function(user) { %>
+            <form action="/movies/recommend" method="POST">
+                <input name="movieid" value="<%= movie.id %>" style="display: none;">
+                <input name="moviename" value="<%= movie.name %>" style="display: none;">
+                <input name="owner" value="<%= currentUser.username %>" style="display: none;">
+                <input name="receiver" value="<%= user.id %>" style="display: none;">
+                <button class="dashboard-btn">Recommend to <%= user.name %> </button>
+            </form>
+    <% }) %>
+    <% } else { %>
+        <h1>Nobody is following you , so you cant recommend movie to anyone ...</h1>
+    <% } %>
+</div>
+
+<% include ../partials/footer %>

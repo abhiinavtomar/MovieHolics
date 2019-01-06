@@ -163,6 +163,16 @@ body {
     text-align: center;
 }
 
+.recommendation-container {
+    text-align: center;
+    color: pink;
+}
+
+.recommend-container {
+    text-align: center;
+    color: white;
+}
+
 .random-user-container {
     text-align: center;
     color: white;

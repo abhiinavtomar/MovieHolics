@@ -76,6 +76,28 @@
     <% } %>
 </div>
 
+<div class="recommendation-container">
+    <h1>Recommendations</h1>
+    <% if(user.recommendation.length != 0) { %>
+        <% user.recommendation.forEach(function(movie) { %>
+            <p> <%= movie.name %> from <%= movie.owner %> </p>
+            <form action="/movies/<%= movie.id %>" method="GET" style="display: inline;">
+                <input style="display: none;" name="movieid" value="<%= movie.id %>">
+                <button class="results-btn">More Info</button>
+            </form> 
+            <% if(currentUser.username == user.username) { %>
+                <form action="/movies/recommend?_method=DELETE" method="POST" style="display: inline;">
+                        <input style="display: none;" name="ownerid" value="<%= user._id %>">
+                        <input style="display: none;" name="movieid" value="<%= movie._id %>">
+                        <button class="results-btn">DELETE</button>
+                </form>
+            <% } %>
+        <% }) %>
+    <% } else { %>
+        <p>No recommendations</p>
+    <% } %>
+</div>
+
 <div class="random-user-container">
     <h1>Check out these profiles</h1>
     <% for(var i = 0; i < allUsers.length ; i++) { %>
