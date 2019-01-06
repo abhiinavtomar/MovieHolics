@@ -82,11 +82,19 @@ router.post("/:id", isLoggedIn, function(req, res) {
             if(flag == 0) {
                 req.user.following.push({name: user.username, id: user._id});
                 req.user.save();
+                user.followers.push({name: req.user.username, id: req.user._id});
+                user.save();
                 req.flash("success", "Successfully followed ...");
                 res.redirect("/" + req.params.id);
             } else {
                 req.user.following.id(myUser._id).remove();
                 req.user.save();
+                user.followers.forEach(function(user1) {
+                    if(user1.name == req.user.username) {
+                        user1.remove();
+                        user.save();
+                    } 
+                });
                 req.flash("success", "Successfully unfollowed...");
                 res.redirect("/" + req.params.id);
             }

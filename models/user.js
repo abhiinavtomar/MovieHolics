@@ -11,7 +11,11 @@ var userSchema  = new mongoose.Schema({
     following: [{
             name: String,
             id: String
-    }]
+        }],
+    followers: [{
+            name: String,
+            id: String
+        }]
     });
 userSchema.plugin(passportLocalMongoose);
 

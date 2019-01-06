@@ -37,6 +37,17 @@
         <br>
     <% } %> 
     
+    <% if(user.followers.length != 0) { %>  
+        <h1>Followers Lists</h1>
+        <% user.followers.forEach(function(user1) { %>
+            <a href="/<%= user1.id %>"><p> <%= user1.name %> </p></a>
+        <% }) %>
+    <% } else { %>
+        <br>
+        <p>No Followers !!!</p>
+        <br>
+    <% } %> 
+    
 </div>
 <div class="myMovies-container">
     <h1>Favourites</h1>
@@ -64,8 +75,8 @@
 
 <div class="random-user-container">
     <h1>Check out these profiles</h1>
-    <% for(var i = 0; i < 2 ; i++) { %>
-        <button class="dashboard-btn"><a href="/<%= allUsers[i]._id%>"> <%= allUsers[i].username %> </a> </button>
+    <% for(var i = 0; i < allUsers.length ; i++) { %>
+        <a href="/<%= allUsers[i]._id%>"> <button class="dashboard-btn"> <%= allUsers[i].username %> </button> </a> 
     <% } %>
 </div>
 
