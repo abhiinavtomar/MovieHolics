@@ -15,8 +15,13 @@
             <input style="display: none;" name="type" value="recommend">
             <button class="results-btn">Recommend</button>
         </form>
+        <br>
+        <br>
         <img src = "<%= data["Poster"] %>" alt ="Image Not Available" width="350px"> 
+        <br>
+        <br>
         
+        <a href="/" class="results-btn" style="text-decoration: none;">Search Again!</a>
     </div>
     <div class="movie-info">
             <p><b>RELEASED</b> : <%= data["Released"] %></p>
@@ -40,7 +45,7 @@
             <p><b>BOX OFFICE</b> : <%= data["BoxOffice"] %></p>
             <p><b>PRODUCTIONPRODUCTION</b> : <%= data["Production"] %></p>
             <p><a href="<%= data["Website"] %>" target="_blank" style="color: yellow;text-decoration: none;"><b>WEBSITE</b> : <%= data["Website"] %></a></p>
-            <a href="/" class="results-btn" style="text-decoration: none;">Search Again!</a>
+            
     </div>    
 
 <% } else { %>

@@ -2,7 +2,6 @@
 
 <div class="user-container">
     <h1>About</h1>
-    
     <p><%= user.username %></p>
     <img src="https://images.unsplash.com/photo-1503248947681-3198a7abfcc9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80" alt="pic" width="300px" height="300px" style="border-radius: 50%;">
     <% if(currentUser.username != user.username) { %>
@@ -47,8 +46,8 @@
         <p>No Followers !!!</p>
         <br>
     <% } %> 
-    
 </div>
+
 <div class="myMovies-container">
     <h1>Favourites</h1>
     <% if(user.myMovies.length != 0) { %>
@@ -74,6 +73,8 @@
         <% } %>
         
     <% } %>
+    <br>
+    <br>
 </div>
 
 <div class="recommendation-container">
@@ -96,13 +97,15 @@
     <% } else { %>
         <p>No recommendations</p>
     <% } %>
-</div>
-
-<div class="random-user-container">
-    <h1>Check out these profiles</h1>
-    <% for(var i = 0; i < allUsers.length ; i++) { %>
+    
+    
+    <h4>Check out these profiles</h4>
+    <% for(var i = 0; i < 2 ; i++) { %>
         <a href="/<%= allUsers[i]._id%>"> <button class="dashboard-btn"> <%= allUsers[i].username %> </button> </a> 
     <% } %>
 </div>
+</div>
+
+
 
 <% include ../partials/footer %>

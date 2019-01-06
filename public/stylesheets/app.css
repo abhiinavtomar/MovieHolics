@@ -42,7 +42,7 @@ body {
 
 .flash-message-container {
     text-align: center;
-    color: violet;
+    color: black;
     margin: 10px;
 }
 
@@ -155,25 +155,33 @@ body {
     text-align: center;
     max-width: 600px;
     min-width: 300px;
+    min-height: 80vh;
 }
 
 .myMovies-container {
-    padding: 50px;
+    width: 400px;
+    border: 2px solid tomato;
+    border-radius: 30px;
+    min-height: 400px;
+    float: left;
+    margin: 30px;
     color:white;
     text-align: center;
+    display: inline-block;
 }
 
 .recommendation-container {
+    width: 400px; 
+    margin: 30px;
     text-align: center;
-    color: pink;
+    border: 2px solid tomato;
+    border-radius: 30px;
+    min-height: 400px;
+    color: white;
+    display: inline-block;
 }
 
 .recommend-container {
-    text-align: center;
-    color: white;
-}
-
-.random-user-container {
     text-align: center;
     color: white;
 }
@@ -196,7 +204,6 @@ body {
 .results-container {
     text-align: center;
     color: white;
-    
 }
 
 .results-elements {
@@ -241,7 +248,7 @@ body {
     color: yellow;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 811px) {
     .right-navbar {
         display: none;
     }
@@ -263,6 +270,20 @@ body {
         display: block;
         float: none;
     }
-    
-    
+    .myMovies-container, .recommendation-container {
+        margin: 2px auto;
+        width: 350px;
+        border: none;
+    }
+    .user-container {
+        float: none;
+    }
+    .results-elements {
+        padding: 1px;
+        width: 350px;
+        margin: 1px;
+    }
+    .year {
+        width: 200px;
+    }
 }

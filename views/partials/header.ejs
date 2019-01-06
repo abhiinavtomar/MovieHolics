@@ -26,16 +26,16 @@
                     <a href="/register" class="navbar-elements">REGISTER</a>
                 <% } else { %>
                     
-                    <a href="/<%= currentUser._id %>" class="navbar-elements">My Dashboard</a>
+                    <a href="/<%= currentUser._id %>" class="navbar-elements">DASHBOARD</a>
                     <a href="/logout" class="navbar-elements">LOGOUT</a>
                 <% } %>
                 
             </div>
             <div class="flash-message-container">
                 <% if(success != "") { %>
-                    <span class="success"> <%= success %> </span>
+                    <div class="success"> <%= success %> </div>
                 <% } else if (error != "") { %>
-                    <span class="error"> <%= error %> </span>
+                    <div class="error"> <%= error %> </div>
                 <% } %>
             </div>
         </div>
