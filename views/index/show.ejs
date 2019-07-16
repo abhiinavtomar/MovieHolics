@@ -14,12 +14,12 @@
         <% }) %>
         <% if(flag == 0) { %>
             <form action="/<%= user._id %>" method="POST">
-                <button class="dashboard-btn">Follow</button>    
+                <button class="dashboard-btn follow-btn"> <i class="fas fa-user-plus"> <span>Follow</span> </i> </button>    
             </form>
             
         <% } else { %>
             <form action="/<%= user._id %>" method="POST">
-                <button class="dashboard-btn">Unfollow</button>    
+                <button class="dashboard-btn follow-btn"> <i class="fas fa-user-alt-slash"> <span>Unfollow</span></i> </button>    
             </form>
             
         <% } %>
@@ -98,13 +98,14 @@
         <p>No recommendations</p>
     <% } %>
     
-    
     <h4>Check out these profiles</h4>
     <% for(var i = 0; i < 2 ; i++) { %>
         <a href="/<%= allUsers[i]._id%>"> <button class="dashboard-btn"> <%= allUsers[i].username %> </button> </a> 
     <% } %>
+    <br>
+    <br>
 </div>
-</div>
+
 
 
 

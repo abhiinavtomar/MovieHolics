@@ -201,6 +201,18 @@ body {
     font-weight: bolder;
 }
 
+.follow-btn {
+    font-size: 20px;    
+}
+
+.follow-btn span{
+    display: none;
+}    
+
+.follow-btn:hover span {
+    display: inline;
+}
+
 .results-container {
     text-align: center;
     color: white;
