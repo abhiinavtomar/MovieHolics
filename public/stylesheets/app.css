@@ -1,5 +1,5 @@
 body {
-    background-image: url("https://images.unsplash.com/photo-1509403690534-26d3b04c8a4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60");
+    background-image: url("/images/background.jpg");
     background-attachment: fixed;
     background-position: center;
     background-size: cover;
@@ -15,19 +15,16 @@ body {
 
 .navbar-elements {
     padding: 5px;
-    font-size: 30px;
+    font-size: 26px;
     margin-left: 10px;
     color: white;
     text-decoration: none;
-    transition: all 0.5s;
 }
 
 .navbar-elements:hover {
-    color: black;
-    background-color: white;
-    border-radius: 20px;
+    color: tomato;
     font-weight: bolder;
-    padding: 10px;
+    border-bottom: 2px solid tomato;
 }
 
 
@@ -46,8 +43,8 @@ body {
     margin: 10px;
 }
 
-.flash-message-container .success {
-    background-color: green;
+.flash-message-container #success {
+    color: coral;
     padding: 10px;
     font-size: 20px;
     margin: 5px;
@@ -55,8 +52,8 @@ body {
     font-weight:  bolder;
 }
 
-.flash-message-container .error {
-    background-color: red;
+.flash-message-container #error {
+    color: red;
     padding: 10px;
     font-size: 20px;
     margin: 5px;
@@ -106,79 +103,117 @@ body {
     font-weight: bolder;
 }
 
-.login-container {
-    margin-top: 10%;
+#backDrop {
+    top: 0;
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.96);
+}
+
+#loginBox {
+    display: none;
+    position: absolute;
     text-align: center;
+    z-index: 20;
+    width: 800px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    background-color: wheat;
+}
+
+#registerBox {
+    display: none;
+    position: absolute;
+    text-align: center;
+    z-index: 20;
+    width: 800px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    background-color: wheat;
 }
 
 .login-input {
-    border-radius: 15px;
     padding: 10px;
-    margin: 10px 2px;
+    margin: 10px auto;
+    border: none;
+    display: block;
+    width: 250px;
     outline: none;
 }
 
 .login-btn {
-    border-radius: 20px;
-    padding: 15px 25px;
+    padding: 10px;
     font-weight: bolder;
     border: none;
     outline: none;
-    background-color: steelblue;
-}
-
-.register-container {
-    margin-top: 10%;
-    text-align: center;
+    font-size: 15px;
+    background-color: lightsalmon;
+    color: white;
+    width: 100px;
+    font-size: 16px;
 }
 
 .register-input {
-    border-radius: 15px;
     padding: 10px;
-    margin: 10px 2px;
+    margin: 10px auto;
+    border: none;
+    display: block;
+    width: 250px;
     outline: none;
 }
 
 .register-btn {
-    border-radius: 20px;
-    padding: 15px 25px;
+    padding: 10px;
     font-weight: bolder;
     border: none;
     outline: none;
-    background-color: steelblue;
+    font-size: 15px;
+    background-color: lightsalmon;
+    color: white;
+    width: 140px;
+    font-size: 16px;
 }
 
 .user-container {
     color:white;
-    margin-right: 30px;
-    float: right;
+    margin: 15px;
     text-align: center;
-    max-width: 600px;
-    min-width: 300px;
-    min-height: 80vh;
+    width: 400px;
+    height: 400px;
+    /* max-width: 500px; */
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 .myMovies-container {
     width: 400px;
-    border: 2px solid tomato;
-    border-radius: 30px;
-    min-height: 400px;
-    float: left;
-    margin: 30px;
+    background-color: rgba(0, 0, 0, 0.6);
     color:white;
     text-align: center;
+    height: 400px;
+    margin: 15px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    /* max-width: 500px; */
     display: inline-block;
 }
 
-.recommendation-container {
-    width: 400px; 
-    margin: 30px;
+.recommendation-container { 
+    width: 400px;
+    margin: 15px; 
     text-align: center;
-    border: 2px solid tomato;
-    border-radius: 30px;
-    min-height: 400px;
+    background-color: rgba(0, 0, 0, 0.6);
+    height: 400px;
     color: white;
+    /* max-width: 500px; */
     display: inline-block;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .recommend-container {
@@ -187,30 +222,28 @@ body {
 }
 
 .dashboard-btn {
-    border-radius: 20px;
-    padding: 15px;
+    padding: 10px;
     font-weight: bolder;
     border: none;
     outline: none;
     background-color: steelblue;
-    transition: padding 0.2s;
 }
 
 .dashboard-btn:hover {
-    padding: 20px;
+    background-color: tomato;
     font-weight: bolder;
 }
 
 .follow-btn {
-    font-size: 20px;    
+    font-size: 18px;    
 }
 
-.follow-btn span{
+#recommendBox {
     display: none;
-}    
-
-.follow-btn:hover span {
-    display: inline;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
 }
 
 .results-container {
@@ -228,22 +261,20 @@ body {
 }
 
 .results-elements:hover {
-    padding: 50px;
+    padding: 20px;
     background-color: yellow;
 }
 
 .results-btn {
-    border-radius: 20px;
-    padding: 15px;
+    padding: 10px;
     font-weight: bolder;
     border: none;
     outline: none;
     background-color: steelblue;
-    transition: padding 0.2s;
 }
 
 .results-btn:hover {
-    padding: 20px;
+    background-color: tomato;
     font-weight: bolder;
 }
 

@@ -1,109 +1,93 @@
 <% include ../partials/header %>
 
-<div class="user-container">
-    <h1>About</h1>
-    <p><%= user.username %></p>
-    <img src="https://images.unsplash.com/photo-1503248947681-3198a7abfcc9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80" alt="pic" width="300px" height="300px" style="border-radius: 50%;">
-    <% if(currentUser.username != user.username) { %>
-        <% var flag = 0; %>
-        <% currentUser.following.forEach(function(user1){ %>
-        <%    if(user.username == user1.name) { %>
-        <%        flag = 1; %>
-        <%       return; %>
-        <%    } %>
-        <% }) %>
-        <% if(flag == 0) { %>
-            <form action="/<%= user._id %>" method="POST">
-                <button class="dashboard-btn follow-btn"> <i class="fas fa-user-plus"> <span>Follow</span> </i> </button>    
-            </form>
-            
-        <% } else { %>
-            <form action="/<%= user._id %>" method="POST">
-                <button class="dashboard-btn follow-btn"> <i class="fas fa-user-alt-slash"> <span>Unfollow</span></i> </button>    
-            </form>
-            
-        <% } %>
-    <% } %>
-    
-    <% if(user.following.length != 0) { %>  
-        <h1>Following Lists</h1>
-        <% user.following.forEach(function(user1) { %>
-            <a href="/<%= user1.id %>"><p> <%= user1.name %> </p></a>
-        <% }) %>
-    <% } else { %>
-        <br>
-        <p>No Followings !!!</p>
-        <br>
-    <% } %> 
-    
-    <% if(user.followers.length != 0) { %>  
-        <h1>Followers Lists</h1>
-        <% user.followers.forEach(function(user1) { %>
-            <a href="/<%= user1.id %>"><p> <%= user1.name %> </p></a>
-        <% }) %>
-    <% } else { %>
-        <br>
-        <p>No Followers !!!</p>
-        <br>
-    <% } %> 
-</div>
-
-<div class="myMovies-container">
-    <h1>Favourites</h1>
-    <% if(user.myMovies.length != 0) { %>
-        
-        <% user.myMovies.forEach(function(movie){ %>
-            <p> <%= movie.name %> </p>
-            <form action="/movies/<%= movie.id %>" method="GET" style="display: inline;">
-                <input style="display: none;" name="movieid" value="<%= movie.id %>">
-                <button class="dashboard-btn">More Info</button>
-            </form>
-            <form action="/movies/<%=movie.id %>?_method=DELETE" method="POST" style="display: inline;">
-                    <input style="display: none;" name="ownerid" value="<%= user._id %>">
-                    <button class="dashboard-btn">DELETE</button>
-                </form>    
-        <% }) %>
-        
-    <% } else { %>
-        <br>
-        <p>NOTHING FOUND IN THE LIST</p>
-        <br>
-        <% if(currentUser.username == user.username) { %>
-            <a href="/" class="dashboard-btn" style="text-decoration: none;">ADD SOMETHING</a>
-        <% } %>
-        
-    <% } %>
-    <br>
-    <br>
-</div>
-
-<div class="recommendation-container">
-    <h1>Recommendations</h1>
-    <% if(user.recommendation.length != 0) { %>
-        <% user.recommendation.forEach(function(movie) { %>
-            <p> <%= movie.name %> from <%= movie.owner %> </p>
-            <form action="/movies/<%= movie.id %>" method="GET" style="display: inline;">
-                <input style="display: none;" name="movieid" value="<%= movie.id %>">
-                <button class="results-btn">More Info</button>
-            </form> 
-            <% if(currentUser.username == user.username) { %>
-                <form action="/movies/recommend?_method=DELETE" method="POST" style="display: inline;">
-                        <input style="display: none;" name="ownerid" value="<%= user._id %>">
-                        <input style="display: none;" name="movieid" value="<%= movie._id %>">
-                        <button class="results-btn">DELETE</button>
+<div style="display: flex;justify-content: center;align-items: center;flex-wrap: wrap;">
+    <div class="user-container">
+        <h1 style="color: cornflowerblue">About</h1>
+        <p>Username - <%= user.username %></p>
+        <% if(currentUser.username != user.username) { %>
+            <% var flag = 0;
+            currentUser.following.forEach(function(user1){ 
+                if(user.username == user1.name) { 
+                  flag = 1; 
+                  return; 
+                } 
+            }) 
+            if(flag == 0) { %>
+                <form action="/<%= user._id %>" method="POST">
+                    <button class="dashboard-btn follow-btn"> <i class="fas fa-user-plus"></i> Follow</button>    
+                </form>
+            <% } else { %>
+                <form action="/<%= user._id %>" method="POST">
+                    <button class="dashboard-btn follow-btn"> <i class="fas fa-user-alt-slash"></i> Unfollow </button>    
                 </form>
             <% } %>
-        <% }) %>
-    <% } else { %>
-        <p>No recommendations</p>
-    <% } %>
-    
-    <h4>Check out these profiles</h4>
-    <% for(var i = 0; i < 2 ; i++) { %>
-        <a href="/<%= allUsers[i]._id%>"> <button class="dashboard-btn"> <%= allUsers[i].username %> </button> </a> 
-    <% } %>
-    <br>
-    <br>
+        <% } %>
+        <h2 style="color: cornflowerblue">Following Lists</h2>
+        <% if(user.following.length != 0) { %>  
+            <% user.following.forEach(function(user1) { %>
+                <a href="/<%= user1.id %>" style="color: crimson; text-decoration: none;"><p> <%= user1.name %> </p></a>
+            <% }) %>
+        <% } else { %>
+            <p>No Followings !!!</p>
+        <% } %> 
+        <h2 style="color: cornflowerblue">Followers Lists</h2>
+        <% if(user.followers.length != 0) { %>  
+            <% user.followers.forEach(function(user1) { %>
+                <a href="/<%= user1.id %>" style="color: crimson; text-decoration: none;"><p> <%= user1.name %> </p></a>
+            <% }) %>
+        <% } else { %>
+            <p>No Followers !!!</p>
+        <% } %> 
+    </div>
+
+    <div class="myMovies-container">
+        <h1 style="color: cornflowerblue">Favourites</h1>
+        <% if(user.myMovies.length != 0) { %>
+            
+            <% user.myMovies.forEach(function(movie){ %>
+                <p> <%= movie.name %> </p>
+                <form action="/movies/<%= movie.id %>" method="GET" style="display: inline;">
+                    <input style="display: none;" name="movieid" value="<%= movie.id %>">
+                    <button class="dashboard-btn">More Info</button>
+                </form>
+                <% if(user.username === currentUser.username) { %>
+                    <form action="/movies/<%=movie.id %>?_method=DELETE" method="POST" style="display: inline;">
+                        <input style="display: none;" name="ownerid" value="<%= user._id %>">
+                        <button class="dashboard-btn">Delete</button>
+                    </form>
+                <% }
+            }) %>
+            
+        <% } else { %>
+            <p>Nothing found !</p>
+            <% if(currentUser.username == user.username) { %>
+                <a href="/" class="dashboard-btn" style="text-decoration: none;color:black">Add Something</a>
+            <% } %>
+            
+        <% } %>
+    </div>
+
+    <div class="recommendation-container">
+        <h1 style="color: cornflowerblue">Recommendations</h1>
+        <% if(user.recommendation.length != 0) { %>
+            <% user.recommendation.forEach(function(movie) { %>
+                <p> <%= movie.name %> from <%= movie.owner %> </p>
+                <form action="/movies/<%= movie.id %>" method="GET" style="display: inline;">
+                    <input style="display: none;" name="movieid" value="<%= movie.id %>">
+                    <button class="results-btn">More Info</button>
+                </form> 
+                <% if(currentUser.username == user.username) { %>
+                    <form action="/movies/recommend?_method=DELETE" method="POST" style="display: inline;">
+                            <input style="display: none;" name="ownerid" value="<%= user._id %>">
+                            <input style="display: none;" name="movieid" value="<%= movie._id %>">
+                            <button class="results-btn">DELETE</button>
+                    </form>
+                <% } %>
+            <% }) %>
+        <% } else { %>
+            <p>No recommendations</p>
+        <% } %>    
+    </div>
 </div>
 
 

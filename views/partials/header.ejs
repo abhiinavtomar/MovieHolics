@@ -4,38 +4,35 @@
         <title>MovieHolics</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/solid.css" integrity="sha384-+0VIRx+yz1WBcCTXBkVQYIBVNEFH1eP6Zknm16roZCyeNg2maWEpk/l/KsyFKs7G" crossorigin="anonymous">
-    	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/regular.css" integrity="sha384-aubIA90W7NxJ+Ly4QHAqo1JBSwQ0jejV75iHhj59KRwVjLVHjuhS3LkDAoa/ltO4" crossorigin="anonymous">
-    	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/brands.css" integrity="sha384-1KLgFVb/gHrlDGLFPgMbeedi6tQBLcWvyNUN+YKXbD7ZFbjX6BLpMDf0PJ32XJfX" crossorigin="anonymous">
-    	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/fontawesome.css" integrity="sha384-jLuaxTTBR42U2qJ/pm4JRouHkEDHkVqH0T1nyQXn1mZ7Snycpf6Rl25VBNthU4z0" crossorigin="anonymous">
-     	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" integrity="sha256-UzFD2WYH2U1dQpKDjjZK72VtPeWP50NoJjd26rnAdUI=" crossorigin="anonymous" />
         <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 	    <link href="https://fonts.googleapis.com/css?family=Avenir" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/stylesheets/app.css">  
         <link rel="icon" href="/images/favicon.ico" type="image/x-icon"/>
-	    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon"/>
+        <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js" integrity="sha256-t8GepnyPmw9t+foMh3mKNvcorqNHamSKtKRxxpUEgFI=" crossorigin="anonymous"></script>
     </head>
     <body>
+        <div id='backDrop'></div>
         <div id="navbar">
-            <a href="/" class="navbar-elements">HOME <i class="fas fa-film"></i></a>
+            <a title="MovieHolics" href="/" class="navbar-elements">MovieHolics</a>
             <a href="javascript:void(0)" onclick="navbarCollapse();"><i class="fa fa-bars navbar-elements navbar-bars"></i></a>
             <div class="right-navbar">
                 <% if(!currentUser) { %>
-                    <a href="/login" class="navbar-elements">LOGIN</a>
-                    <a href="/register" class="navbar-elements">REGISTER</a>
+                    <a title='Login' id='loginBtn' class="navbar-elements">Login</a>
+                    <a title="Register" id='registerBtn' class="navbar-elements">Register</a>
                 <% } else { %>
-                    
-                    <a href="/<%= currentUser._id %>" class="navbar-elements">DASHBOARD</a>
-                    <a href="/logout" class="navbar-elements">LOGOUT</a>
+                    <a title="Dashboard" href="/<%= currentUser._id %>" class="navbar-elements"><i style='font-size: 40px;' class="fas fa-address-card"></i></a>
+                    <a title="Sign Out" href="/logout" class="navbar-elements"><i style='font-size: 35px;' class="fas fa-sign-out-alt"></i></a>
                 <% } %>
                 
             </div>
             <div class="flash-message-container">
                 <% if(success != "") { %>
-                    <div class="success"> <%= success %> </div>
+                    <div id="success"> <%= success %> </div>
                 <% } else if (error != "") { %>
-                    <div class="error"> <%= error %> </div>
+                    <div id="error"> <%= error %> </div>
                 <% } %>
             </div>
         </div>

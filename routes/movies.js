@@ -113,7 +113,7 @@ function isLoggedIn(req, res, next) {
         return next();
     } 
     req.flash("error", "Please login to continue");
-    res.redirect("/login");
+    res.redirect("/");
 }
 
 module.exports = router;

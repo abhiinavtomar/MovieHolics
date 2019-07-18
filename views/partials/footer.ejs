@@ -1,3 +1,15 @@
         </div>
+        <script>
+            document.getElementById('backDrop').addEventListener('click', function() {
+                document.getElementById('backDrop').style.display = 'none';
+                document.getElementById('loginBox').style.display = 'none';
+                document.getElementById('recommendBox').style.display = 'none';
+                document.getElementById('registerBox').style.display = 'none';
+            });
+            setTimeout(function() {
+                document.getElementById('success').innerHTML = "";
+                document.getElementById('error').innerHTML = "";
+            }, 2000);
+        </script>
     </body>
 </html>
