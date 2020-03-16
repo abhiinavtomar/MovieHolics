@@ -13,12 +13,15 @@ var express         = require("express"),
 var indexRoutes     = require("./routes/index"),
     moviesRoutes    = require("./routes/movies");    
     
-var url = process.env.DATABASEURL || "mongodb://localhost:27017/movieholics";
+// process.env.DATABASEURL  || "mongodb://localhost:27017/movieholics"
+var url = "mongodb://movieholics1:movieholics1stuser@ds149344.mlab.com:49344/movieholics";
+mongoose.set('useUnifiedTopology', true);
 mongoose.connect(url, {useNewUrlParser: true});
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
+app.use(bodyParser.json());
 
     //  PASSPORT CONFIGURATION  
 app.use(require("express-session")({
@@ -44,7 +47,7 @@ app.use(function(req, res, next) {
 app.use("/movies", moviesRoutes);
 app.use("/", indexRoutes);
 
-app.listen(8080, function(req, res){
+app.listen(process.env.PORT || 8080, function(req, res){
     console.log("Server Started"); 
 });
 

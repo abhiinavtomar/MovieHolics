@@ -10,45 +10,43 @@
         <link rel="stylesheet" type="text/css" href="/stylesheets/app.css">  
         <link rel="icon" href="/images/favicon.ico" type="image/x-icon"/>
         <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon"/>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js" integrity="sha256-t8GepnyPmw9t+foMh3mKNvcorqNHamSKtKRxxpUEgFI=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     </head>
-    <body>
-        <div id='backDrop'></div>
-        <div id="navbar">
-            <a title="MovieHolics" href="/" class="navbar-elements">MovieHolics</a>
-            <a href="javascript:void(0)" onclick="navbarCollapse();"><i class="fa fa-bars navbar-elements navbar-bars"></i></a>
-            <div class="right-navbar">
-                <% if(!currentUser) { %>
-                    <a title='Login' id='loginBtn' class="navbar-elements">Login</a>
-                    <a title="Register" id='registerBtn' class="navbar-elements">Register</a>
-                <% } else { %>
-                    <a title="Dashboard" href="/<%= currentUser._id %>" class="navbar-elements"><i style='font-size: 40px;' class="fas fa-address-card"></i></a>
-                    <a title="Sign Out" href="/logout" class="navbar-elements"><i style='font-size: 35px;' class="fas fa-sign-out-alt"></i></a>
-                <% } %>
-                
+    <body style="background-color: black;">      
+        <div class="ui text inverted menu" style="margin: 10px;">
+            <div class="item">
+                <a class="ui inverted header" href="/"><i class="film icon"></i>MovieHolics</a>
             </div>
-            <div class="flash-message-container">
-                <% if(success != "") { %>
-                    <div id="success"> <%= success %> </div>
-                <% } else if (error != "") { %>
-                    <div id="error"> <%= error %> </div>
+            <div class="ui right dropdown item" id="MenuBtn">
+                <i class="ui large bars icon"></i>
+                <div class="menu" id="menuItems" style="width: 350px; height: 300px; background-color: rgba(0, 0, 0, 0.9);">
+                <% if(!currentUser) { %>
+                    <div class="item" style="width: 100%; text-indent: 10px;"><a style="font-weight: bolder; font-size: 20px;" href="/login"><i class="sign-in icon"></i>   LOGIN</a></div>
+        <div class="item" style="width: 100%; text-indent: 10px;"><a style="font-weight: bolder; font-size: 20px;" href="/register"><i class="user plus icon"></i>   REGISTER</a></div>
+                <% } else { %>
+                    <div class="item" style="width: 100%; text-indent: 10px;"><a style="font-weight: bolder; font-size: 20px;" title="Dashboard" href="/<%= currentUser._id %>"><i style='font-size: 40px;' class="ui user icon"></i>   DASHBOARD</a></div>
+                    <div class="item" style="width: 100%; text-indent: 10px;"><a style="font-weight: bolder; font-size: 20px;" href="/logout"><i class="sign-out icon"></i>   LOGOUT</a></div>
                 <% } %>
+                    <div class="item" style="position: absolute;bottom: 0;"><i class="copyright icon" style="color: wheat;"> 2020 - Abhinav Tomar</i></div>
+            </div>
             </div>
         </div>
-        
+        <% if(error != "") { %>
+            <div style="position: fixed; top:50px; z-index: 10; width: 100%" class="ui message" id="errorMsg">
+                <i class="close icon" onclick="closeMsg()"></i>
+                <div class="ui center aligned header">
+                    Error Occured!
+                </div>
+                <p style="text-align: center;"><%= error %></p>
+            </div>
+        <% } %>
+
         <script>
-            function navbarCollapse() {
-                var myNavbar = document.getElementById("navbar");
-                if(myNavbar.classList.contains("responsive")) {
-                    myNavbar.classList.remove("responsive");
-                } else {
-                    myNavbar.classList.add("responsive");
+            setTimeout(closeMsg, 3000);
+            function closeMsg() {
+                if(document.getElementById('errorMsg')) {
+                    document.getElementById('errorMsg').style.display = 'none';
                 }
             }
-        </script> 
-                
- 
-        
-    
-    
+        </script>

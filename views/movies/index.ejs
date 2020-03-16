@@ -3,34 +3,51 @@
 
 <% if(data["Response"] == "True") { %>
         
-        <div class="results-container">
-        <h1>Your Results</h1>
+    <div class="ui cards" style="margin: 10px 0px;">
         <% data["Search"].forEach(function(movie) { %>
-            <div class="results-elements">
-                <h2> <%= movie["Title"] %></h2>
-                    <img src = "<%= movie["Poster"] %>" alt = "Image Not Available" height="350px" width="250px" style="border-radius: 50%;">
-                    <p> <%= movie["Year"] %> </p>
-                    <form action="/movies/<%= movie["imdbID"] %>" method="GET" style="display: inline;">
-                        <input style="display: none;" name="movieid" value="<%= movie["imdbID"] %>">
-                        <button class="results-btn">More Info</button>
-                    </form>
+
+            <div class="ui card" style="width: 320px;height: 430px;margin: 5px auto;">
+                <div class="content">
+                    <%= movie["Title"].substring(0, 37) %>
+                </div>
+                <div class="image" style="width: 320px;height: 250px;overflow: hidden;">
+                    <img src = "<%= movie['Poster'] %>" alt = "Image Not Available" width="100%" height="100%" style="width: 100%;height: 100%;">
+                </div>
+                <div class="content" style="font-weight: bolder;">
+                    <span class="right floated">
+                        <form action="/movies/<%= movie['imdbID'] %>" method="GET" style="display: inline;">
+                            <input style="display: none;" name="movieid" value="<%= movie['imdbID'] %>">
+                            <button class="results-btn">More Info</button>
+                        </form>
+                    </span>
+                    <i class="large film icon"></i>
+                    <%= movie["Type"].toUpperCase() %><br>
+                    <i class="large calendar icon"></i>
+                    <%= movie["Year"] %>    
+                </div>
+                <div class="extra content">
+                    
                     <% if(currentUser) { %>  
                         <form action="/movies" method="POST" style="display: inline;">
-                            <input style="display: none;" name="movieid" value="<%= movie["imdbID"]  %>">
-                            <input style="display: none;" name="moviename" value="<%= movie["Title"] %>">
-                            <button class="results-btn">Add to favourites</button>
+                            <input style="display: none;" name="movieid" value="<%= movie['imdbID']  %>">
+                            <input style="display: none;" name="moviename" value="<%= movie['Title'] %>">
+                            <button class="results-btn"><i class="bookmark outline icon"></i> Add to favourites</button>
                         </form>
                         <form action="/movies/recommend" method="GET" style="display: inline;">
-                            <input style="display: none;" name="movieid" value="<%= movie["imdbID"] %>">
-                            <input style="display: none;" name="moviename" value="<%= movie["Title"] %>">
+                            <input style="display: none;" name="movieid" value="<%= movie['imdbID'] %>">
+                            <input style="display: none;" name="moviename" value="<%= movie['Title'] %>">
                             <input style="display: none;" name="type" value="recommend">
-                            <button class="results-btn">Recommend</button>
+                            
+                            <button class="results-btn"><i class="thumbs up outline icon"></i> Recommend</button>
                         </form>
+                    <% } else { %>
+                        <div style="font-size: 18px;color: red;"><button class="ui icon red button"><a style="color: white;" href="/login">LOGIN</a></button> to use more features.</div>
                     <% } %>
-            </div>
+                </div>
+              </div>
         <% }) %>
-        <h3><a href="/" >Search Again!</a></h3>
     </div>
+    <div style="position: fixed; bottom: 0;" class="ui red icon button"><i class="ui large search icon"></i> <a style="color: white;" href="/" > Search Again!</a></div>
         
 <% } else { %>
     

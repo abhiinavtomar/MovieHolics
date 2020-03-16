@@ -7,21 +7,17 @@
         <form action="/movies" method="POST" style="display: inline;">
             <input style="display: none;" name="movieid" value="<%= data["imdbID"]  %>">
             <input style="display: none;" name="moviename" value="<%= data["Title"] %>">
-            <button class="results-btn">Add to myList</button>
+            <button class="results-btn"><i class="bookmark outline icon"></i>Add to favourites</button>
         </form>
         <form action="/movies/recommend" method="GET" style="display: inline;">
             <input style="display: none;" name="movieid" value="<%= data["imdbID"] %>">
             <input style="display: none;" name="moviename" value="<%= data["Title"] %>">
             <input style="display: none;" name="type" value="recommend">
-            <button class="results-btn">Recommend</button>
+            <button class="results-btn"><i class="thumbs up icon"></i>Recommend</button>
         </form>
         <br>
-        <br>
         <img src = "<%= data["Poster"] %>" alt ="Image Not Available" width="350px"> 
-        <br>
-        <br>
-        
-        <a href="/" class="results-btn" style="text-decoration: none;">Search Again!</a>
+        <button class="ui red medium icon button" style="position: fixed;bottom: 0;right: 0;"><a href="/" style="text-decoration: none;color: white;"><i class="large search icon"></i>Search again</a></button>
     </div>
     <div class="movie-info">
             <p><b>RELEASED</b> : <%= data["Released"] %></p>

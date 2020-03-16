@@ -1,15 +1,13 @@
-        </div>
         <script>
-            document.getElementById('backDrop').addEventListener('click', function() {
-                document.getElementById('backDrop').style.display = 'none';
-                document.getElementById('loginBox').style.display = 'none';
-                document.getElementById('recommendBox').style.display = 'none';
-                document.getElementById('registerBox').style.display = 'none';
-            });
-            setTimeout(function() {
-                document.getElementById('success').innerHTML = "";
-                document.getElementById('error').innerHTML = "";
-            }, 2000);
+            var el = document.getElementById('menuItems');
+            var el2 = document.getElementById('MenuBtn')
+            el2.addEventListener('click', function(event) {    
+                if(el.style.display == "block") {
+                    el.style.display = "none";
+                } else {
+                    el.style.display = "block";
+                }
+            }); 
         </script>
     </body>
 </html>

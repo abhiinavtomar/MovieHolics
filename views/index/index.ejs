@@ -1,78 +1,32 @@
 <% include ../partials/header %>
 
-    
-    <div id='loginBox'>
-        <div id='closeLoginBox' style="cursor: pointer;float: right; font-weight: bolder; font-size: 40px; margin: 0 10px;">&times;</div>
-        <div style="font-weight: bolder;font-size: 30px;margin: 20px 10px 10px">
-            Login Form
-        </div>
-        <br>
-        <br>
-        <div>
-            <form action="/login" method="POST">
-                <input type="text" name="username" placeholder="USERNAME" class="login-input">
-                <input type="password" name="password" placeholder="PASSWORD" class="login-input">
-                <br>
-                <button class="login-btn">Sign In</button>
-            </form>
-        </div>
-        <br>
-    </div>
-    <div id='registerBox'>
-            <div id='closeRegistrationBox' style="cursor: pointer;float: right; font-weight: bolder; font-size: 40px; margin: 0 10px;">&times;</div>
-            <div style="font-weight: bolder;font-size: 30px;margin: 20px 10px 10px">
-                Registration Form
-            </div>
-            <br>
-            <br>
-            <div class="register-container">
-                <form action="/register" method="POST">
-                    <input type="text" name="username" placeholder="USERNAME" class="register-input">
-                    <input type="password" name="password" placeholder="PASSWORD" class="register-input">
-                    <br>
-                    <button class="register-btn">Register</button>
-                </form>
-            </div>
-            <br>
-        </div>
-    <form action="/movies" method="GET">
-        <div class="search-container">    
-            <input type="text" class="search" name="search" placeholder="Search Movieholics">
-            <br>
-            <input type="text" class="year" name="year" placeholder="Year">
-            <input list="genres" class="year" name="genre" placeholder="Genre">
-                <datalist id="genres">
-                    <option value="movie"></option>
-                    <option value="series"></option>
-                    <option value="episode"></option>
-                </datalist>
-            <br>
-            <button type="submit" class="submit">Search</button>
-        </div>
-    </form>
 
-    <script>
-        <% if(currentUser) {} else { %>
-            document.getElementById('loginBtn').addEventListener('click', function() {
-                document.getElementById('backDrop').style.display = 'block';
-                document.getElementById('loginBox').style.display = 'block';
-            });
-            document.getElementById('registerBtn').addEventListener('click', function() {
-                document.getElementById('backDrop').style.display = 'block';
-                document.getElementById('registerBox').style.display = 'block';
-            });
-            document.getElementById('closeLoginBox').addEventListener('click', function() {
-                document.getElementById('backDrop').style.display = 'none';
-                document.getElementById('loginBox').style.display = 'none';
-                document.getElementById('registerBox').style.display = 'none';
-            });
-            document.getElementById('closeRegistrationBox').addEventListener('click', function() {
-                document.getElementById('backDrop').style.display = 'none';
-                document.getElementById('loginBox').style.display = 'none';
-                document.getElementById('registerBox').style.display = 'none';
-            });
-        <% } %>
-    </script>
-            
+<div class="ui container" style="margin-top: 70px;">
+    <div class="ui segment"> 
+        <form action="/movies" method="GET" class="ui form">
+            <div class="field">
+                <div class="field">
+                    <label style="text-align: center;font-size: 20px;">Search Movieholics</label>
+                    <br>
+                    <input type="text" name="search" placeholder="Search Movie, Series ...">
+                </div>
+                <div class="two fields">
+                    <div class="field">
+                        <input type="text" name="year" placeholder="Year">
+                    </div>
+                    <div class="field">
+                        <select id="genres" name="genre">
+                            <option value="">Genre</option>
+                            <option value="movie">Movies</option>
+                            <option value="series">Series</option>
+                            <option value="episode">Episode</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <button class="ui green icon button"><i class="large search icon"></i>  Search</button>
+        </form>
+    </div>
+</div>
 
 <% include ../partials/footer %>

@@ -66,46 +66,39 @@ router.post("/recommend", isLoggedIn, function(req, res) {
     });
 });
 
-router.delete("/recommend", isLoggedIn, function(req, res) {
-    if(req.user._id.equals(req.body.ownerid)) {
-        req.flash("success", "Recommendation deleted successfully ...");
-        req.user.recommendation.id(req.body.movieid).remove();
+router.delete("/recommend/:id", isLoggedIn, function(req, res) {
+    var index = req.user.recommendation.findIndex(movie=> movie.id == req.params.id);
+    if(index) {
+        req.user.recommendation[index].remove();
         req.user.save();
-        res.redirect("/" + req.body.ownerid);
+        res.json({'res': 1});
     } else {
-        req.flash("error", "You dont have permissions to delete this recommendation !!!");
-        res.redirect("/" + req.body.ownerid); 
+        res.json({'res': 0});
     }
 });
     
 router.get("/:id", function(req, res){
-    var id= req.query.movieid;
+    var id= req.params.id;
     var url = "http://omdbapi.com/?i=" + id + "&apikey=thewdb";
-        request(url, function(error, response, body){
-            if(!error && response.statusCode == 200) {
-                var data = JSON.parse(body);
-                res.render("movies/show", {data: data});
-            }
-        });
+    request(url, function(error, response, body){
+        if(!error && response.statusCode == 200) {
+            var data = JSON.parse(body);
+            res.render("movies/show", {data: data});
+        }
+    });
 });
 
 router.delete("/:id", isLoggedIn, function(req, res) {
-    if(req.user._id.equals(req.body.ownerid)) {
-        req.flash("success", "Movie deleted from your list");
-        var myMovie;
-        req.user.myMovies.forEach(function(movie){
-            if(movie.id == req.params.id) {
-                myMovie = movie;
-                return;
-            } 
-        });
-        req.user.myMovies.id(myMovie._id).remove();
-        req.user.save();
-        res.redirect("/" + req.user._id);
-    } else {
-        req.flash("error", "You dont have permissions to delete this movie from the list");
-        res.redirect("/" + req.body.ownerid);
-    }    
+    var myMovie;
+    req.user.myMovies.forEach(function(movie){
+        if(movie.id == req.params.id) {
+            myMovie = movie;
+            return;
+        } 
+    });
+    req.user.myMovies.id(myMovie._id).remove();
+    req.user.save();
+    res.json({'res': 1});
 });
 
 function isLoggedIn(req, res, next) {

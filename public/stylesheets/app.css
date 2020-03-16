@@ -1,5 +1,6 @@
 body {
-    background-image: url("/images/background.jpg");
+    /* background-image: url("/images/background.jpg"); */
+    background-color: black;
     background-attachment: fixed;
     background-position: center;
     background-size: cover;
@@ -282,7 +283,7 @@ body {
     width: 350px;
     float: left;
     color: white;
-    margin: 20px;
+    margin: 5px;
 }
 
 .movie-info {

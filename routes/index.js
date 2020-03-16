@@ -8,27 +8,32 @@ router.get("/", function(req, res){
     res.render("index/index");
 });
 
+router.get("/login", function(req, res) {
+    res.render("index/login");
+});
+
 router.post("/login", passport.authenticate("local", {
     successRedirect: "/",
-    failureRedirect: "/",
-    failureFlash: true,
-    successFlash: "Welcome back to MovieHolics"
+    failureRedirect: "/login",
+    failureFlash: true
 }), function(req, res){});
 
-router.get("/logout", function(req, res) {
-    req.flash("success", "Logged you out, come back soon ...");    
+router.get("/logout", function(req, res) {  
     req.logout();
     res.redirect("/");
+});
+
+router.get('/register', function(req, res) {
+    res.render('index/register');
 });
 
 router.post("/register", function(req, res) {
     User.register(new User({username: req.body.username}), req.body.password, function(err, user) {
         if(err) {
             req.flash("error", err.message);
-            return res.redirect("/");
+            return res.redirect("/register");
         } else {
                 passport.authenticate("local")(req, res, function(){
-                    req.flash("success", "Welcome to MovieHolics");
                     res.redirect("/");
             });
         }    
