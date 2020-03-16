@@ -13,8 +13,7 @@ var express         = require("express"),
 var indexRoutes     = require("./routes/index"),
     moviesRoutes    = require("./routes/movies");    
     
-// process.env.DATABASEURL  || "mongodb://localhost:27017/movieholics"
-var url = "mongodb://movieholics1:movieholics1stuser@ds149344.mlab.com:49344/movieholics";
+var url = process.env.DATABASEURL  || "mongodb://localhost:27017/movieholics";
 mongoose.set('useUnifiedTopology', true);
 mongoose.connect(url, {useNewUrlParser: true});
 app.set("view engine", "ejs");
